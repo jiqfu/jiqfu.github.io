@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://jiqfu.github.io">
-  <title>Archives: 2019/7 | 小橘子</title>
+  <title>java给对象中的包装类设置默认值 | 小橘子</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="小橘子">
-<meta property="og:url" content="https://jiqfu.github.io/archives/2019/07/index.html">
+  <meta name="description" content="处理方法如下主要适用于，对象中使用了包装类，但是不能给null需要有默认值的情况 12345678910111213141516171819202122232425262728293031323334353637383940 /** * 处理对象中包装类，因为快捷签没有用包装类 * * @param object 对象 */ public static  void handleParamDefau">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java给对象中的包装类设置默认值">
+<meta property="og:url" content="https://jiqfu.github.io/2019/07/28/java给对象中的包装类设置默认值/index.html">
 <meta property="og:site_name" content="小橘子">
+<meta property="og:description" content="处理方法如下主要适用于，对象中使用了包装类，但是不能给null需要有默认值的情况 12345678910111213141516171819202122232425262728293031323334353637383940 /** * 处理对象中包装类，因为快捷签没有用包装类 * * @param object 对象 */ public static  void handleParamDefau">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-28T04:33:16.508Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小橘子">
+<meta name="twitter:title" content="java给对象中的包装类设置默认值">
+<meta name="twitter:description" content="处理方法如下主要适用于，对象中使用了包装类，但是不能给null需要有默认值的情况 12345678910111213141516171819202122232425262728293031323334353637383940 /** * 处理对象中包装类，因为快捷签没有用包装类 * * @param object 对象 */ public static  void handleParamDefau">
   
     <link rel="alternative" href="/atom.xml" title="小橘子" type="application/atom+xml">
   
@@ -144,37 +148,57 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java给对象中的包装类设置默认值" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/28/java给对象中的包装类设置默认值/" class="archive-article-date">
-  	<time datetime="2019-07-28T04:27:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/28/java给对象中的包装类设置默认值/">java给对象中的包装类设置默认值</a>
+    <h1 class="article-title" itemprop="name">
+      java给对象中的包装类设置默认值
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
+        
+        <a href="/2019/07/28/java给对象中的包装类设置默认值/" class="archive-article-date">
+  	<time datetime="2019-07-28T04:27:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="处理方法如下"><a href="#处理方法如下" class="headerlink" title="处理方法如下"></a>处理方法如下</h3><p>主要适用于，对象中使用了包装类，但是不能给null需要有默认值的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * 处理对象中包装类，因为快捷签没有用包装类</span><br><span class="line"> *</span><br><span class="line"> * @param object 对象</span><br><span class="line"> */</span><br><span class="line"> public static  void handleParamDefault(Object object) &#123;</span><br><span class="line">    Class&lt;?&gt; aClass = object.getClass();</span><br><span class="line">    Field[] declaredFields = aClass.getDeclaredFields();</span><br><span class="line">    for (Field field : declaredFields) &#123;</span><br><span class="line">      //遍历所有字段</span><br><span class="line">        if (field.getType().equals(Integer.class)) &#123;</span><br><span class="line">           // 处理Integer</span><br><span class="line">            setValue(object, field, 0);</span><br><span class="line">        &#125;</span><br><span class="line">        if (field.getType().equals(Boolean.class)) &#123;</span><br><span class="line">            // 处理Boolean</span><br><span class="line">            setValue(object, field, Boolean.TRUE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * 设置默认值</span><br><span class="line"> *</span><br><span class="line"> * @param object 待处理对象</span><br><span class="line"> * @param field  字段</span><br><span class="line"> * @param t      包装类值</span><br><span class="line"> * @param &lt;T&gt;    包装类</span><br><span class="line"> */</span><br><span class="line">public static  &lt;T&gt; void setValue(Object object, Field field, T t) &#123;</span><br><span class="line">    boolean accessible = field.isAccessible();</span><br><span class="line">    field.setAccessible(true);</span><br><span class="line">    try &#123;</span><br><span class="line">        if (field.get(object) == null) &#123;</span><br><span class="line">            field.set(object, t);</span><br><span class="line">        &#125;</span><br><span class="line">        field.setAccessible(accessible);</span><br><span class="line">    &#125; catch (IllegalAccessException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -187,17 +211,123 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://jiqfu.github.io/2019/07/28/java给对象中的包装类设置默认值/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
+
   
 
-    
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#处理方法如下"><span class="toc-number">1.</span> <span class="toc-text">处理方法如下</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "https://jiqfu.github.io/2019/07/28/java给对象中的包装类设置默认值/",
+  owner: 'jiqfu',
+  repo: 'jiqfu.github.io',
+  oauth: {
+    client_id: '6e4f4b2b868f885ee598',
+    client_secret: 'df1faef4c55b9a03c83f7a7efecd0ae46247ca6a',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+  
 
 
           </div>
@@ -220,8 +350,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
